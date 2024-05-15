@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background-color: #222;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .scoreboard {
+            display: flex;
+            align-items: center;
+            background-color: #333;
+            padding: 10px;
+            border-radius: 10px;
+        }
+        .fighter {
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+        }
+        .fighter:nth-child(1) {
+            border-right: 2px solid #555;
+        }
+        .fighter-name {
+            margin-left: 10px;
+            font-size: 20px;
+        }
+        .rank {
+            background-color: #555;
+            border-radius: 3px;
+            padding: 2px 5px;
+            font-size: 14px;
+        }
+        .center {
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            background-color: #000;
+            border-radius: 10px;
+            margin: 0 10px;
+        }
+        .time {
+            font-size: 24px;
+            margin: 0 10px;
+        }
+        .round {
+            background-color: #d4a017;
+            color: #000;
+            border-radius: 3px;
+            padding: 2px 5px;
+            font-size: 14px;
+        }
+    </style>
+    <title>UFC Live Scoreboard</title>
+</head>
+<body>
+
+<div class="scoreboard">
+    <div class="fighter">
+        <div class="rank" id="rank1">3</div>
+        <div class="fighter-name" id="name1">POIRIER</div>
+    </div>
+    <div class="center">
+        <div class="logo">UFC</div>
+        <div class="time" id="time">5:00</div>
+        <div class="round" id="round">R1</div>
+    </div>
+    <div class="fighter">
+        <div class="rank" id="rank2">12</div>
+        <div class="fighter-name" id="name2">SAINT DENIS</div>
+    </div>
+</div>
+
+<script>
+    // JavaScript to update the time, round, and other elements
+    function updateTime() {
+        const timeElement = document.getElementById('time');
+        const roundElement = document.getElementById('round');
+        let currentTime = 300; // 5 minutes in seconds
+        let currentRound = 1;
+
+        setInterval(() => {
+            if (currentTime > 0) {
+                currentTime--;
+                let minutes = Math.floor(currentTime / 60);
+                let seconds = currentTime % 60;
+                timeElement.textContent = `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+            } else {
+                currentRound++;
+                currentTime = 300; // reset timer for the next round
+                roundElement.textContent = `R${currentRound}`;
+            }
+        }, 1000);
+    }
+
+    window.onload = updateTime;
+</script>
+
+</body>
+</html>
